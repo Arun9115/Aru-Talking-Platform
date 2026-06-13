@@ -1,16 +1,45 @@
 import { useState } from 'react';
 
+// Aru Talking Platform owner WhatsApp number (country code + number, no + or spaces)
+const WHATSAPP_NUMBER = '919115099740';
+
 export default function Upload() {
   const [form, setForm] = useState({
     title: '',
     category: 'Motivation',
     description: '',
   });
+  const [mediaName, setMediaName] = useState('');
+  const [coverName, setCoverName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`✅ Story "${form.title}" uploaded successfully! (Demo only)`);
+
+    // Build the message that lands in your WhatsApp
+    const lines = [
+      '🆕 *New Story Submission — Aru Talking Platform*',
+      '',
+      `📌 *Title:* ${form.title}`,
+      `🏷️ *Category:* ${form.category}`,
+      `📝 *Description:* ${form.description}`,
+    ];
+
+    if (coverName) lines.push(`🖼️ *Cover file:* ${coverName}`);
+    if (mediaName) lines.push(`🎬 *Media file:* ${mediaName}`);
+
+    if (coverName || mediaName) {
+      lines.push('', '_(Please attach the above file(s) in this chat.)_');
+    }
+
+    const text = encodeURIComponent(lines.join('\n'));
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+
+    // Open WhatsApp (app on mobile, WhatsApp Web on desktop)
+    window.open(waUrl, '_blank');
+
     setForm({ title: '', category: 'Motivation', description: '' });
+    setMediaName('');
+    setCoverName('');
   };
 
   return (
@@ -60,12 +89,22 @@ export default function Upload() {
 
         <div>
           <label className="text-sm font-medium mb-1 block">Cover Image</label>
-          <input type="file" accept="image/*" className="input" />
+          <input
+            type="file"
+            accept="image/*"
+            className="input"
+            onChange={(e) => setCoverName(e.target.files?.[0]?.name || '')}
+          />
         </div>
 
         <div>
           <label className="text-sm font-medium mb-1 block">Audio / Video File</label>
-          <input type="file" accept="audio/*,video/*" className="input" />
+          <input
+            type="file"
+            accept="audio/*,video/*"
+            className="input"
+            onChange={(e) => setMediaName(e.target.files?.[0]?.name || '')}
+          />
         </div>
 
         <button className="btn-primary w-full" type="submit">

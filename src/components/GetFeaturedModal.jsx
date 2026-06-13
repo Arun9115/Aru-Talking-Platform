@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+// Aru Talking Platform owner WhatsApp number (country code + number, no + or spaces)
+const WHATSAPP_NUMBER = '919115099740';
+
 export default function GetFeaturedModal({ open, onClose }) {
   const [form, setForm] = useState({
     name: '',
@@ -8,6 +11,7 @@ export default function GetFeaturedModal({ open, onClose }) {
     summary: '',
     video: '',
   });
+  const [videoName, setVideoName] = useState('');
 
   if (!open) return null;
 
@@ -16,10 +20,30 @@ export default function GetFeaturedModal({ open, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(
-      `🎉 Thank you ${form.name}! Your story has been submitted. Our team will contact you shortly.`
-    );
+
+    // Build the message that lands in your WhatsApp
+    const lines = [
+      '🎤 *Get Featured Request — Aru Talking Platform*',
+      '',
+      `👤 *Name:* ${form.name}`,
+      `📞 *Phone:* ${form.phone}`,
+      `📧 *Email:* ${form.email}`,
+      `📝 *Story:* ${form.summary}`,
+    ];
+    if (videoName) {
+      lines.push(
+        `🎬 *Intro video:* ${videoName}`,
+        '',
+        '_(Please attach your intro video in this chat.)_'
+      );
+    }
+
+    const text = encodeURIComponent(lines.join('\n'));
+    // Open WhatsApp (app on mobile, WhatsApp Web on desktop)
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+
     setForm({ name: '', phone: '', email: '', summary: '', video: '' });
+    setVideoName('');
     onClose();
   };
 
@@ -84,6 +108,7 @@ export default function GetFeaturedModal({ open, onClose }) {
             <input
               type="file"
               accept="video/*"
+              onChange={(e) => setVideoName(e.target.files?.[0]?.name || '')}
               className="input mt-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-brand-600 file:text-white file:font-medium"
             />
           </label>

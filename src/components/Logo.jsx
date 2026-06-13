@@ -8,10 +8,10 @@ export default function Logo({ to = '/', showTagline = true, size = 'md' }) {
   }[size];
 
   return (
-    <Link to={to} className="flex items-center gap-2.5 group select-none">
+    <Link to={to} className="flex items-center gap-2.5 group select-none min-w-0">
       {/* Waveform icon mark */}
       <div
-        className={`relative ${scale.box} bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 flex items-center justify-center shadow-lg shadow-brand-600/30 group-hover:shadow-brand-600/50 group-hover:scale-105 transition-all duration-300 overflow-hidden`}
+        className={`relative ${scale.box} shrink-0 bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 flex items-center justify-center shadow-lg shadow-brand-600/30 group-hover:shadow-brand-600/50 group-hover:scale-105 transition-all duration-300 overflow-hidden`}
       >
         <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0" />
         <div className="relative flex items-center gap-[2px] h-1/2">
@@ -23,7 +23,7 @@ export default function Logo({ to = '/', showTagline = true, size = 'md' }) {
       </div>
 
       {/* Wordmark */}
-      <div className="leading-none">
+      <div className="leading-none min-w-0">
         <div className="flex items-baseline font-display tracking-tight">
           <span
             className={`${scale.a} font-normal text-slate-500 dark:text-slate-400 lowercase`}
@@ -44,7 +44,7 @@ export default function Logo({ to = '/', showTagline = true, size = 'md' }) {
         </div>
         {showTagline && (
           <div
-            className={`${scale.tag} text-slate-500 dark:text-slate-400 uppercase tracking-[0.35em] mt-1 font-medium`}
+            className={`hidden sm:block ${scale.tag} text-slate-500 dark:text-slate-400 uppercase tracking-[0.35em] mt-1 font-medium`}
           >
             The Podcast Platform
           </div>

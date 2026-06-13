@@ -1,11 +1,29 @@
 import { useState } from 'react';
 
+// Aru Talking Platform owner WhatsApp number (country code + number, no + or spaces)
+const WHATSAPP_NUMBER = '919115099740';
+
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Build the message that lands in your WhatsApp
+    const text = encodeURIComponent(
+      [
+        '✉️ *New Message — Aru Talking Platform*',
+        '',
+        `👤 *Name:* ${form.name}`,
+        `📧 *Email:* ${form.email}`,
+        `💬 *Message:* ${form.message}`,
+      ].join('\n')
+    );
+
+    // Open WhatsApp (app on mobile, WhatsApp Web on desktop)
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+
     setSent(true);
     setForm({ name: '', email: '', message: '' });
     setTimeout(() => setSent(false), 4000);

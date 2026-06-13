@@ -49,8 +49,8 @@ export default function Profile() {
 
         <h2 className="text-2xl font-extrabold mt-10 mb-5">My Stories</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-10">
-          {myStories.map((s) => (
-            <StoryCard key={s.id} story={s} />
+          {myStories.map((s, i) => (
+            <StoryCard key={s.id} story={s} index={i} />
           ))}
         </div>
       </div>

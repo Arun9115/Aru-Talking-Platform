@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+// Aru Talking Platform owner WhatsApp number (country code + number, no + or spaces)
+const WHATSAPP_NUMBER = '919115099740';
+
 export default function ApplyPodcast() {
   const [form, setForm] = useState({
     name: '',
@@ -8,11 +11,35 @@ export default function ApplyPodcast() {
     topic: '',
     about: '',
   });
+  const [videoName, setVideoName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`🎉 Application received! We'll reach out within 48 hours, ${form.name}.`);
+
+    // Build the message that lands in your WhatsApp
+    const lines = [
+      '🎙️ *Podcast Application — Aru Talking Platform*',
+      '',
+      `👤 *Name:* ${form.name}`,
+      `📞 *Phone:* ${form.phone}`,
+      `📧 *Email:* ${form.email}`,
+      `🏷️ *Topic:* ${form.topic}`,
+      `📝 *About:* ${form.about}`,
+    ];
+    if (videoName) {
+      lines.push(
+        `🎬 *Video:* ${videoName}`,
+        '',
+        '_(Please attach your video in this chat.)_'
+      );
+    }
+
+    const text = encodeURIComponent(lines.join('\n'));
+    // Open WhatsApp (app on mobile, WhatsApp Web on desktop)
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+
     setForm({ name: '', phone: '', email: '', topic: '', about: '' });
+    setVideoName('');
   };
 
   return (
@@ -67,7 +94,12 @@ export default function ApplyPodcast() {
           value={form.about}
           onChange={(e) => setForm({ ...form, about: e.target.value })}
         />
-        <input type="file" accept="video/*" className="input" />
+        <input
+          type="file"
+          accept="video/*"
+          className="input"
+          onChange={(e) => setVideoName(e.target.files?.[0]?.name || '')}
+        />
 
         <button className="btn-primary w-full">Submit Application</button>
       </form>

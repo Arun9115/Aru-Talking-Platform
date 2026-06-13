@@ -33,20 +33,35 @@ export default function Home({ onFeatured }) {
             backgroundSize: '60px 60px',
           }}
         />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-white">
-          <div className="max-w-2xl animate-fadeUp">
-            <span className="inline-block mb-4 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur text-sm font-medium">
+        {/* Floating decorative blobs */}
+        <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 blur-2xl animate-float pointer-events-none" />
+        <div
+          className="absolute bottom-0 -left-10 w-52 h-52 rounded-full bg-amber-300/20 blur-2xl animate-float pointer-events-none"
+          style={{ animationDelay: '1.5s' }}
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-28 text-white">
+          <div className="max-w-2xl">
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur text-sm font-medium animate-fadeUp">
               ✨ India's #1 Storytelling Platform
             </span>
-            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
+            <h1
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 animate-fadeUp"
+              style={{ animationDelay: '0.1s' }}
+            >
               Har Story <span className="italic">Important</span> Hai
             </h1>
-            <p className="text-lg md:text-xl opacity-90 mb-8">
+            <p
+              className="text-base sm:text-lg md:text-xl opacity-90 mb-8 animate-fadeUp"
+              style={{ animationDelay: '0.2s' }}
+            >
               Real stories of real people. Discover motivation, career journeys,
               raw failures and the lessons that changed lives — all in one
               place.
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div
+              className="flex flex-wrap gap-3 animate-fadeUp"
+              style={{ animationDelay: '0.3s' }}
+            >
               <button onClick={onFeatured} className="btn-primary bg-white text-brand-700 hover:bg-slate-100 shadow-xl">
                 🎤 Get Featured
               </button>
@@ -93,8 +108,8 @@ export default function Home({ onFeatured }) {
           <span className="text-sm text-slate-500">{trending.length} stories</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-          {trending.map((s) => (
-            <StoryCard key={s.id} story={s} />
+          {trending.map((s, i) => (
+            <StoryCard key={s.id} story={s} index={i} />
           ))}
         </div>
 
@@ -106,8 +121,8 @@ export default function Home({ onFeatured }) {
           <span className="text-sm text-slate-500">{filtered.length} results</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((s) => (
-            <StoryCard key={s.id} story={s} />
+          {filtered.map((s, i) => (
+            <StoryCard key={s.id} story={s} index={i} />
           ))}
           {filtered.length === 0 && (
             <div className="col-span-full text-center py-16 text-slate-500">

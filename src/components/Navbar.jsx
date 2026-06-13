@@ -12,15 +12,17 @@ const links = [
   { to: '/contact', label: 'Contact' },
 ];
 
-export default function Navbar({ onFeatured }) {
+export default function Navbar() {
   const { dark, toggle } = useTheme();
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-lg bg-white/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
         {/* Logo */}
-        <Logo size="md" />
+        <div className="min-w-0 shrink">
+          <Logo size="md" />
+        </div>
 
         {/* Desktop links */}
         <nav className="hidden lg:flex items-center gap-1">
@@ -42,13 +44,7 @@ export default function Navbar({ onFeatured }) {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={onFeatured}
-            className="hidden md:inline-flex btn-primary text-sm"
-          >
-            🎤 Get Featured
-          </button>
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={toggle}
             aria-label="Toggle theme"
@@ -56,12 +52,6 @@ export default function Navbar({ onFeatured }) {
           >
             {dark ? '☀️' : '🌙'}
           </button>
-          <Link
-            to="/login"
-            className="hidden sm:inline-flex btn-outline text-sm py-2 px-4"
-          >
-            Login
-          </Link>
           <button
             className="lg:hidden w-10 h-10 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center"
             onClick={() => setOpen((o) => !o)}
@@ -91,15 +81,6 @@ export default function Navbar({ onFeatured }) {
                 {l.label}
               </NavLink>
             ))}
-            <button
-              onClick={() => {
-                setOpen(false);
-                onFeatured();
-              }}
-              className="btn-primary mt-2"
-            >
-              🎤 Get Featured
-            </button>
           </div>
         </div>
       )}

@@ -108,6 +108,8 @@ export const podcasts = [
     cover: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800',
     duration: '42:18',
     audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    video:
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
   },
   {
     id: 2,
@@ -116,6 +118,8 @@ export const podcasts = [
     cover: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800',
     duration: '38:04',
     audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    video:
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
   },
   {
     id: 3,
@@ -124,5 +128,7 @@ export const podcasts = [
     cover: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800',
     duration: '51:22',
     audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+    video:
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
   },
 ];

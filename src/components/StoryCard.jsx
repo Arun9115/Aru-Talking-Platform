@@ -1,13 +1,16 @@
 import { useState } from 'react';
 
-export default function StoryCard({ story }) {
+export default function StoryCard({ story, index = 0 }) {
   const [liked, setLiked] = useState(false);
 
   const handleShare = () => alert(`Share link copied for "${story.title}"`);
   const handleComment = () => alert('Comments are a demo feature.');
 
   return (
-    <article className="card group animate-fadeUp">
+    <article
+      className="card group animate-fadeUp"
+      style={{ animationDelay: `${Math.min(index, 8) * 80}ms` }}
+    >
       <div className="relative overflow-hidden aspect-video">
         <img
           src={story.image}
