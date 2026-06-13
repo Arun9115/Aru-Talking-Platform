@@ -84,11 +84,19 @@ export default function Home({ onFeatured }) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search stories..."
-              className="input pl-14"
+              className="input pl-12"
             />
-            <span className="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-              🔍
-            </span>
+            <svg
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-slate-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <line x1="16.5" y1="16.5" x2="21" y2="21" strokeLinecap="round" />
+            </svg>
           </div>
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {categories.map((c) => (
