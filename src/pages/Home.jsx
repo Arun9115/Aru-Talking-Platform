@@ -80,15 +80,9 @@ export default function Home({ onFeatured }) {
       {/* Search & Categories */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
-          <div className="relative flex-1">
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search stories..."
-              className="input pl-12"
-            />
+          <div className="flex-1 flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus-within:border-brand-600 focus-within:ring-2 focus-within:ring-brand-600/20 transition">
             <svg
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none text-slate-400"
+              className="w-5 h-5 shrink-0 text-slate-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -98,6 +92,12 @@ export default function Home({ onFeatured }) {
               <circle cx="11" cy="11" r="7" />
               <line x1="16.5" y1="16.5" x2="21" y2="21" strokeLinecap="round" />
             </svg>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search stories..."
+              className="flex-1 bg-transparent border-0 outline-none p-0 placeholder:text-slate-400"
+            />
           </div>
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {categories.map((c) => (
