@@ -19,6 +19,7 @@ export default function Home({ onFeatured }) {
   }, [query, cat]);
 
   const trending = stories.filter((s) => s.trending);
+  const isSearching = query.trim() !== '' || cat !== 'All';
 
   return (
     <div>
@@ -113,36 +114,57 @@ export default function Home({ onFeatured }) {
           </div>
         </div>
 
-        {/* Trending */}
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="text-2xl md:text-3xl font-extrabold">
-            🔥 Trending Now
-          </h2>
-          <span className="text-sm text-slate-500">{trending.length} stories</span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-          {trending.map((s, i) => (
-            <StoryCard key={s.id} story={s} index={i} />
-          ))}
-        </div>
-
-        {/* Featured */}
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="text-2xl md:text-3xl font-extrabold">
-            ⭐ Featured Stories
-          </h2>
-          <span className="text-sm text-slate-500">{filtered.length} results</span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((s, i) => (
-            <StoryCard key={s.id} story={s} index={i} />
-          ))}
-          {filtered.length === 0 && (
-            <div className="col-span-full text-center py-16 text-slate-500">
-              No stories match your search.
+        {isSearching ? (
+          /* Search / filter results */
+          <>
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-2xl md:text-3xl font-extrabold">
+                🔎 Search Results
+              </h2>
+              <span className="text-sm text-slate-500">
+                {filtered.length} {filtered.length === 1 ? 'result' : 'results'}
+              </span>
             </div>
-          )}
-        </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filtered.map((s, i) => (
+                <StoryCard key={s.id} story={s} index={i} />
+              ))}
+              {filtered.length === 0 && (
+                <div className="col-span-full text-center py-16 text-slate-500">
+                  No stories match your search.
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Trending */}
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-2xl md:text-3xl font-extrabold">
+                🔥 Trending Now
+              </h2>
+              <span className="text-sm text-slate-500">{trending.length} stories</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+              {trending.map((s, i) => (
+                <StoryCard key={s.id} story={s} index={i} />
+              ))}
+            </div>
+
+            {/* Featured */}
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-2xl md:text-3xl font-extrabold">
+                ⭐ Featured Stories
+              </h2>
+              <span className="text-sm text-slate-500">{stories.length} stories</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {stories.map((s, i) => (
+                <StoryCard key={s.id} story={s} index={i} />
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       {/* About / Mission */}
