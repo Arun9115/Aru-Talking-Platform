@@ -65,7 +65,10 @@ export default function Home({ onFeatured }) {
               <button onClick={onFeatured} className="btn-primary bg-white text-brand-700 hover:bg-slate-100 shadow-xl">
                 🎤 Get Featured
               </button>
-              <Link to="/podcast" className="btn-outline border-white text-white hover:bg-white hover:text-brand-700">
+              <Link
+                to="/podcast"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border-2 border-white bg-white/10 backdrop-blur font-semibold text-white hover:bg-white hover:text-brand-700 transition-all"
+              >
                 ▶ Watch Podcast
               </Link>
             </div>
@@ -81,9 +84,11 @@ export default function Home({ onFeatured }) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search stories..."
-              className="input pl-12"
+              className="input pl-14"
             />
-            <span className="absolute left-4 top-1/2 -translate-y-1/2">🔍</span>
+            <span className="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+              🔍
+            </span>
           </div>
           <div className="flex gap-2 overflow-x-auto no-scrollbar">
             {categories.map((c) => (
